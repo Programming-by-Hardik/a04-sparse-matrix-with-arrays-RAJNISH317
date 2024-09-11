@@ -1,6 +1,5 @@
 // sparse_matrix_assignment.c
 // This program represents a sparse matrix using a 2D array in C and includes test cases.
-
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -32,10 +31,7 @@ int main() {
 
 // Function to convert a matrix into sparse matrix format
 void createSparseMatrix(int sparseMatrix[][3], int originalMatrix[][N], int rows, int cols) {
-    //WRITE THE FUNCTION DESCRIPTION HERE
-    
-
-int k = 1; // Start from 1 because sparseMatrix[0] will store dimensions and count
+    int k = 1; // Start from 1 because sparseMatrix[0] will store dimensions and count
     sparseMatrix[0][0] = rows;
     sparseMatrix[0][1] = cols;
 
@@ -50,14 +46,16 @@ int k = 1; // Start from 1 because sparseMatrix[0] will store dimensions and cou
                 sparseMatrix[k][2] = originalMatrix[i][j];
                 k++;
             }
-        } 
+        }
+    }
+
+    // Set the total number of non-zero elements in the sparseMatrix[0][2]
+    sparseMatrix[0][2] = nonZeroCount;
 }
 
 // Function to print sparse matrix representation
 void printSparseMatrix(int sparseMatrix[][3], int nonZeroCount) {
-    //WRITE THE FUNCTION DESCRIPTION HERE
-    
-int rows = sparseMatrix[0][0];
+    int rows = sparseMatrix[0][0];
     int cols = sparseMatrix[0][1];
 
     printf("Sparse Matrix (dimensions: %dx%d, non-zero elements: %d):\n", rows, cols, nonZeroCount);
@@ -66,8 +64,6 @@ int rows = sparseMatrix[0][0];
     for (int i = 1; i <= nonZeroCount; i++) {
         printf("%d %d %d\n", sparseMatrix[i][0], sparseMatrix[i][1], sparseMatrix[i][2]);
     }
-
-
 }
 
 //--------------------------------------------------------
@@ -86,7 +82,7 @@ bool testCreateSparseMatrix() {
 
     int expectedSparseMatrix[MAX][3] = {
         {4, 4, 5},   // 4x4 matrix with 5 non-zero elements
-        {0, 2, 3},// Original matrix[0][2] = 3
+        {0, 2, 3},   // Original matrix[0][2] = 3
         {1, 1, 4},   // Original matrix[1][1] = 4
         {2, 3, 5},   // Original matrix[2][3] = 5
         {3, 1, 2},   // Original matrix[3][1] = 2
