@@ -35,25 +35,37 @@ void createSparseMatrix(int sparseMatrix[][3], int originalMatrix[][N], int rows
     //WRITE THE FUNCTION DESCRIPTION HERE
     
 
+int k = 1; // Start from 1 because sparseMatrix[0] will store dimensions and count
+    sparseMatrix[0][0] = rows;
+    sparseMatrix[0][1] = cols;
 
-
-
-
-
-
-
+    // Count non-zero elements
+    int nonZeroCount = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (originalMatrix[i][j] != 0) {
+                nonZeroCount++;
+                sparseMatrix[k][0] = i;
+                sparseMatrix[k][1] = j;
+                sparseMatrix[k][2] = originalMatrix[i][j];
+                k++;
+            }
+        } 
 }
 
 // Function to print sparse matrix representation
 void printSparseMatrix(int sparseMatrix[][3], int nonZeroCount) {
     //WRITE THE FUNCTION DESCRIPTION HERE
     
+int rows = sparseMatrix[0][0];
+    int cols = sparseMatrix[0][1];
 
+    printf("Sparse Matrix (dimensions: %dx%d, non-zero elements: %d):\n", rows, cols, nonZeroCount);
+    printf("Row Column Value\n");
 
-
-
-
-
+    for (int i = 1; i <= nonZeroCount; i++) {
+        printf("%d %d %d\n", sparseMatrix[i][0], sparseMatrix[i][1], sparseMatrix[i][2]);
+    }
 
 
 }
@@ -74,7 +86,7 @@ bool testCreateSparseMatrix() {
 
     int expectedSparseMatrix[MAX][3] = {
         {4, 4, 5},   // 4x4 matrix with 5 non-zero elements
-        {0, 2, 3},   // Original matrix[0][2] = 3
+        {0, 2, 3},// Original matrix[0][2] = 3
         {1, 1, 4},   // Original matrix[1][1] = 4
         {2, 3, 5},   // Original matrix[2][3] = 5
         {3, 1, 2},   // Original matrix[3][1] = 2
